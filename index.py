@@ -11,7 +11,7 @@ with open('key.txt', 'rb') as key_file:
     key = key_file.read()
 
 # MongoDB initialization
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb+srv://cyberKids:pXhoFAd8g3bGaZjv@cluster0.jeolobf.mongodb.net/?retryWrites=true&w=majority')
 db = client['passwords']
 
 def encrypt_password(password):
