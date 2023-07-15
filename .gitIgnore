@@ -1,2 +1,4 @@
-passwords.db
 env/*
+.vercel
+password.db
+.gitIgnore

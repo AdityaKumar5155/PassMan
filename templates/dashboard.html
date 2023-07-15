@@ -1,29 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Dashboard</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Manager - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body>
     <div class="container">
-        <h1>Welcome to your Dashboard, {{ username }}</h1>
-        <h2>Your Passwords:</h2>
-        <ul>
-            {% for password in passwords %}
-            <li>
-                <strong>Website:</strong> {{ password[1] }}<br>
-                <strong>Username/Email:</strong> {{ password[2] }}
-                <div class="actions">
-                    <a href="{{ url_for('view_password', password_id=password[0]) }}">View</a>
-                    <a href="{{ url_for('delete_password', password_id=password[0]) }}">Delete</a>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
+        <h1>Welcome, {{ username }}</h1>
+        <h2>Password Manager - Dashboard</h2>
+
+        <h3>Your Passwords:</h3>
+
+        {% if passwords %}
+            <ul>
+                {% for password in passwords %}
+                    <li>
+                        <strong>Website:</strong> {{ password.website }}<br>
+                        <strong>Username/Email:</strong> {{ password.username }}
+                        <div class="actions">
+                            <p><a href="{{ url_for('view_password', password_id=password._id) }}">View Password</a></p>
+                            <p><a href="{{ url_for('delete_password', password_id=password._id) }}">Delete Password</a></p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No passwords found.</p>
+        {% endif %}
+
         <div class="buttons">
-            <a href="{{ url_for('add_password') }}" class="button">Add Password</a>
+            <a href="{{ url_for('add_password') }}" class="button">Add New Password</a>
             <a href="{{ url_for('logout') }}" class="button">Logout</a>
         </div>
     </div>
 </body>
+
 </html>
